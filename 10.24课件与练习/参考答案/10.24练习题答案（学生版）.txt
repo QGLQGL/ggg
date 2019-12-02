@@ -1,0 +1,105 @@
+
+
+import calendar
+import datetime
+import os
+import random
+import re
+import time
+from pprint import pprint
+
+import numpy as np
+import pandas as pd
+from dateutil.parser import parse
+
+#确定历史数据的时间范围，从上月
+def get_month_period(month_begin=1, month_end=0):
+    '''
+    获得自然月份间隔时间段, 默认取前一个自然月
+    :param month_begin: 几个月前的第一天
+    :param month_end: 几个月前的结束第一天
+    :return: e.g（2018,4,1 ，2018，5,1）
+    '''
+    now = 
+    day = 
+
+    def get_day(shijian, zhouqi):
+       
+
+
+        return (last_month_first_day, last_month_last_day)
+
+   
+
+    return begin, end
+
+#定义爬取天气数据的函数
+
+def get_weather_data(city='hangzhou', time_func_name=get_month_period, *args):
+    begin, end = time_func_name(*args)
+    print(begin, end)
+    # 获得需要爬取的日期区间
+    date_list = [date.strftime("%Y%m") for date in pd.date_range(begin, end, freq='M')]
+    # 构建url list
+    url_list = ["http://www.tianqihoubao.com /xxxxx    for date in date_list]
+    pprint(url_list)
+    # 合并后的天气信息文件
+    filepath = os.path.join(  xxxx        )
+    #如果文件已经存在
+    if os.path.exists(filepath):
+        weather_data = pd.read_excel(filepath)
+    else:
+        # 抓取天气信息
+        weather_data = pd.DataFrame(columns=["日期", "天气状况", "气温", "风力风向"])
+       #从网站读取数据
+      
+       #合并数据
+            weather_data = pd.concat(           )
+
+        weather_data.to_excel(filepath, index=None)
+    return weather_data, filepath
+
+#清洗风力数据
+def clean_fengli(x):
+    '''正则表达式清洗风力数据的格式'''
+    pattern1 = re.compile('(\d+)(\W+)(\d+)')  # 1-2, 1~2
+    pattern2 = re.compile('(\d*)(\W+)(\d+)')  # <2  <=2
+    pattern3 = re.compile('(\d+)')  # 2
+    if re.match(pattern1, x):
+        return np.mean(      xxxxxx                               )
+    elif re.match(pattern2, x):
+        return int(re.match(pattern2, x).group()[1]) - 0.5
+    else:
+        return int(re.match(pattern3, x).group(0))
+
+#清洗天气数据
+def clean_weather_data(df, filepath, remove=True):
+    '''使用正则表达式清洗天气数据'''
+    ptianqi = re.compile('\w+')
+    pwendu = re.compile('\d+')
+    pfengli = re.compile('(\w+)\s+(\d*\W+\d+)')
+    df['主天气状况'] = df.loc[:, '天气状况'].apply(lambda x: ptianqi.findall(x)[0])
+    df['次天气状况'] =
+    df['主风向'] = 
+    df['主风力'] = 
+    df['主风力'] = 
+    df['次风向'] = 
+    df['次风力'] = 
+    df['次风力'] = 
+    df['最高温度'] = 
+    df['最低温度'] = 
+    df["日期"] = 
+
+    #删除文件
+    if remove:
+        os.remove(filepath)
+    df.drop(columns=["天气状况", "气温", "风力风向"], inplace=True)
+    # 存储所有清洗好的天气数据
+   
+    return df  # [日期 主天气状况 次天气状况 主风向 主风力 次风向 次风力 最高温度 最低温度]
+
+
+if __name__ == '__main__':
+    weather_data, filepath = get_weather_data('hangzhou', get_month_period, 3)
+    clean_weather_data(weather_data, filepath, remove=True)
+    

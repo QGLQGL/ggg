@@ -1,0 +1,63 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+# matplotlib是python中类似MATLAB的绘图工具
+# 在任何绘图之前，我们需要一个Figure对象，可以理解成我们需要一张画板才能开始绘图
+
+
+# pd.test
+# s=pd.Series([1, 4, 'ww', 'tt'])
+# print(s)
+
+# *********************************************************
+
+# dates = pd.date_range('20130101', periods = 6)
+# print(dates)
+
+# *********************************************************
+# ts = pd.Series(np.random.randn(1000), index=pd.date_range('1/1/2000', periods=1000))
+# ts = ts.cumsum()
+# # ts.plot()
+# # plt.show()
+#
+# df = pd.DataFrame(np.random.randn(1000, 4), index=ts.index, columns=['a', 'b', 'c', 'd'])
+# df = df.cumsum()
+# plt.figure()
+#
+# df.plot()
+# plt.show()
+#
+# plt.legend(loc='best')
+#
+#
+# df.to_csv('foo.csv')        # 将以上四个数据保存到 foo 表格中
+# print(pd.read_csv('foo.csv'))   # 读取 foo 表格中的数据
+
+# *********************************************************
+
+# 这儿有点问题，不能输出且报错
+# df.to_excel('foo1.xlsx', sheet_name='Sheet1')
+# print(pd.read_excel('foo1.xlsx', 'Sheet1', index_col=None, na_values=['NA']))
+
+# *********************************************************
+
+
+fig = plt.figure()
+# ax = fig.add_subplot(221)  # 创建两行两列的图表（一共就有四个图表），且现在指定在四个图表中的第一个图表中作图
+ax = fig.add_subplot(111)    # 创建一行一列的图表
+ax.set(xlim=[0.5, 4.5], ylim=[-2, 8], title='An Example Axes', ylabel='Y-Axis', xlabel='X-Axis')
+# xlim 为x轴从0.5开始到4.5的间距    ylim 为为y轴从-2开始到8的间距
+# 绘图标题为 An Example Axes  y轴为 Y-Axis  x轴为 X-Axis
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
